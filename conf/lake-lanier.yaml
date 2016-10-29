@@ -1,0 +1,77 @@
+---
+community:
+  # Underlying distribution
+  distribution: lognormal
+  
+  # Profile estimation method
+  method: nt_nmax
+  
+  # NT/Nmax
+  # approximated from genus distribution in Poretsky et al 2014 (PLoS ONE).
+  nt_nmax: 6.0
+  
+  # NT (total number of cells)
+  # = 1.294e12*1.2e9
+  nt: 1.5528e+21
+  
+  # NT/Nmax ancillary assumption
+  assume: nmin_1
+
+sample:
+  # % Noise introduced in rates estimation.
+  noise_sd: 0.1
+  
+  # % Sampling effect
+  # The volume of Lake Lanier is estimated to be 1.294 km^3. A typical sample is
+  # 2 10L carboys.
+  # = 20/1.294e12
+  sampling_effect: 1.545595e-11
+  
+  # % Filtering effect
+  # The filtering efficiency is assumed to be 100%. Any loss during filtration
+  # should be reflected in the extraction effect.
+  filtering_effect: 1.0
+  
+  # % Extraction effect
+  # A typical bacterial cell contains between 2 and 3 fg of DNA (see
+  # Christensen, Olsen, and Bakken, 1995, Microb Ecol 29:49-62), so I'm assuming
+  # and average of 2.5 fg/cell (or 2.9e-9 ug/cell). The cell counts of Lake
+  # Lanier have an average of 9.02e5 cells in 750 ul, or 1.2e9 cells/l. Finally,
+  # the total DNA yield of the extraction, measured with qubit after cleaning,
+  # is on average 1.7 ug/l filtered. This results in an efficiency of ~60%.
+  # = (1.7) / (2.5e-9 * 1.2e9)
+  extraction_effect: 0.5667
+  
+  # % Library effect
+  # Assuming a total sampled volume of 20 l (see "Sampling effect" above) and an
+  # extraction yield of 1.7 ug/l (see "Extraction effect" above), one would
+  # expect a total of 34 ug of DNA extracted per sample (on average). The
+  # sequencing libraries prepared in this project typically use a total of 1 ng
+  # (adjusting concentration). Libraries undergo 12-14 rounds of PCR, which
+  # should result in a total of around 8 ug from the input 1ng. This is, a 50
+  # ul stock at 2-4 nM DNA (0.1-0.2 pmol DNA), from which 5 ul (10-20 fmol DNA)
+  # are diluted into 1ml at 10 pM DNA.
+  # = (1e-9 / 34e-6) * (10e-15 / 0.1e-12)
+  library_effect: 2.941176e-06
+  
+  # % Sequencing effect
+  # 10 fmol loaded correspond to 6 billion molecules. On average, the sequenced
+  # datasets result in 19 million pairs of reads.
+  # = 1.85574e7 / 6e9
+  sequencing_effect: 0.0030929
+  
+  # % Annotation effect
+  # From the average 19 million pairs of reads sequenced, an average of 13
+  # million reads pass the QC steps, with around 10% reduction on average read
+  # length.
+  # = 0.9 * 1.32293e+07 / 1.85574e7
+  annotation_effect: 0.6415969
+  
+  # % Other parameters
+  # Use multiple draw (one per effect), as opposed to a single composed draw.
+  # multidraw: true
+  
+beta:
+  # Index used to estimate beta diversity
+  index: mash
+  kmer: 21

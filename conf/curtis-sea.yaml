@@ -1,0 +1,12 @@
+---
+community:
+  # Underlying distribution
+  distribution: lognormal
+  # Profile estimation method
+  method: nt_nmax
+  # NT/Nmax
+  nt_nmax: 4.0 # lake or sea
+  # NT (total number of cells)
+  nt: 1.0e+29 # sea
+  # NT/Nmax ancillary assumption
+  assume: nmin_1
