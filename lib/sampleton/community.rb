@@ -1,5 +1,5 @@
 
-class ESEM::Community
+class Sampleton::Community
   @@PARAMS = [ :distribution, :method, :nt_nmax, :nt, :assume ]
   attr_accessor *@@PARAMS
   
@@ -28,14 +28,14 @@ class ESEM::Community
       when :preston
         # Estimate `a` and `st` from Eqs. 8-9 in Curtis et al 2002
         nmax = nt/nt_nmax
-        a = ESEM.solve_numerically([0.0,1.0], 1.0) do |a|
+        a = Sampleton.solve_numerically([0.0,1.0], 1.0) do |a|
           curtis_eq_9(a, nmax)/nt
         end
         st = curtis_eq_8(a).ceil
       when :nmin_1
         # Estimate `a` and `st` from Eq. 10-11 in Curtis et al 2002
         nmax = nt/nt_nmax
-        a = ESEM.solve_numerically([0.0,1.0], 1.0) do |a|
+        a = Sampleton.solve_numerically([0.0,1.0], 1.0) do |a|
           curtis_eq_11(a,1,nmax)/nt
         end
         st = curtis_eq_10(a, nmax, 1.0).ceil
@@ -48,9 +48,9 @@ class ESEM::Community
       sd = Math.sqrt( 1.0/((a**2)*2.0*Math.log(2)) )
       
       # Realize community
-      rco = ESEM::RealizedCommunity.new(st)
+      rco = Sampleton::RealizedCommunity.new(st)
       (1 .. st).each do |i|
-        rco[i-1] = ESEM.rlognormal(mu, sd).round
+        rco[i-1] = Sampleton.rlognormal(mu, sd).round
       end
 
       return rco
@@ -79,7 +79,7 @@ class ESEM::Community
     end
 end
 
-class ESEM::RealizedCommunity
+class Sampleton::RealizedCommunity
   attr :profile
   
   def initialize(richness)

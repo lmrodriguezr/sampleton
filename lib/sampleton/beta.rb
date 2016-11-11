@@ -1,5 +1,5 @@
 
-class ESEM::Beta
+class Sampleton::Beta
   @@PARAMS = [ :index, :kmer ]
   attr_accessor *@@PARAMS
 

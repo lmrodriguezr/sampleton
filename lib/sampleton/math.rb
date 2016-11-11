@@ -1,5 +1,5 @@
 
-class ESEM
+class Sampleton
 
   @@_factorial = [1]
   
@@ -57,7 +57,7 @@ class ESEM
     q = 1.0-p
     cdf_loop = 0.0
     (0 .. n).each do |i|
-      cdf_loop += ESEM.n_choose_k(n, i)*(p**i)*(q**(n-i))
+      cdf_loop += Sampleton.n_choose_k(n, i)*(p**i)*(q**(n-i))
       return i if cdf_loop >= cdf_exp
     end
     n
@@ -86,11 +86,11 @@ class ESEM
   def self.rsample(n, p)
     np = n*p
     if n > 9.0*(1.0-p)/p and n > 9.0*p/(1.0-p) # 3-sd rule
-      [n, [0, ESEM.rnormal(np, Math.sqrt( np*(1.0-p) )).round].max].min
+      [n, [0, Sampleton.rnormal(np, Math.sqrt( np*(1.0-p) )).round].max].min
     elsif (n > 20 and p <= 0.05) or (n >= 100 and np <= 10)
-      [n, ESEM.rpoisson(np)].min
+      [n, Sampleton.rpoisson(np)].min
     else
-      ESEM.rbinomial(n, p)
+      Sampleton.rbinomial(n, p)
     end
   end
 

@@ -1,4 +1,4 @@
-class ESEM
+class Sampleton
   VERSION       = "0.1.1"
   VERSION_ARRAY = VERSION.split(/\./).map { |x| x.to_i } # :nodoc:
   VERSION_MAJOR = VERSION_ARRAY[0] # :nodoc:

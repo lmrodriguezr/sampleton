@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
 $:.push File.expand_path("../../lib", __FILE__)
-require "esem"
+require "sampleton"
 
 if ARGV.empty?
   puts "Usage: #{$0} config.yaml"
   exit
 end
-e = ESEM.new
+e = Sampleton.new
 e.parametrize(ARGV.first)
 rc = e.community.realize
 s1 = e.sample.realize(rc.profile)

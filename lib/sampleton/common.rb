@@ -1,11 +1,11 @@
-require "esem/version"
-require "esem/math"
-require "esem/community"
-require "esem/sample"
-require "esem/beta"
+require "sampleton/version"
+require "sampleton/math"
+require "sampleton/community"
+require "sampleton/sample"
+require "sampleton/beta"
 require "yaml"
 
-class ESEM
+class Sampleton
   
   @@threads = 2
   def self.threads ; @@threads ; end
@@ -14,9 +14,9 @@ class ESEM
   attr :community, :sample, :beta
 
   def initialize
-    @community = ESEM::Community.new
-    @sample = ESEM::Sample.new
-    @beta = ESEM::Beta.new
+    @community = Sampleton::Community.new
+    @sample = Sampleton::Sample.new
+    @beta = Sampleton::Beta.new
   end
 
   def parametrize(file)
