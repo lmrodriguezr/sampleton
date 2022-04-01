@@ -1,6 +1,7 @@
 # Sampleton
 
-A community sample simulator.
+A community sample simulator for the evaluation of alpha- and beta-diversity
+metrics.
 
 # Influence of sampling in the estimation of beta-diversity
 
