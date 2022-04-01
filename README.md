@@ -32,57 +32,66 @@ distribution to describe prokaryotic abundance. For example, see [Curtis2002][1]
 for use and defense of this distribution. Also, note that the family of
 distributions proposed by [Hubbell2001][2] in the Unified Neutral Theory of
 Biodiversity and Biogeography (UNTB) deals with real differences between samples
-(real beta-diversity > 0). These differences are assumed be non-existent in the
+(real beta-diversity > 0). These differences are assumed to be non-existent in the
 current study, hence we refrain from using UNTB as the underlying hypothesis for
 abundance distributions, not to confound the ecologic stochasticity (assumed in
 UNTB) with the sampling stochasticity.
 
-### Lognormal characterized by NT/Nmax
+### Lognormal characterized by `NT/Nmax`
 
 The work of [Curtis2002][1] allows one to estimate the complete individuals
-curve by using the measurable index NT/Nmax and an ancillary assumption.
+curve by using the measurable index `NT/Nmax` and an ancillary assumption.
 
-#### NT/Nmax
+#### `NT/Nmax`
 
 This is simply the reciprocal of the relative abundance of the most abundant
 species in the community.
 
-#### NT/Nmax ancillary assumption
+#### `NT/Nmax` ancillary assumption
 
 One of two assumptions can be used to estimate the individuals curve of a
-community given NT/Nmax and a lognormal distribution:
+community given `NT/Nmax` and a lognormal distribution:
 
 1. One is Preston's cannonical hypothesis (see [Preston1948][3]), assuming
    ecologic and evolutionary homogeneity, and stating that the peak of the
-   individuals curve coincides with Nmax (see also [Sugihara1980][4]).
+   individuals curve coincides with `Nmax` (see also [Sugihara1980][4]).
 
-2. The second is that the least abundant species has one individual (i.e.,
-   `Nmin=1`) and only one species has this abundance (i.e., `S(Nmin)=1`). This
-   assumption is defended by [Curtis2002][1] for "small" samples, but is also
-   extended ("with care") in the same work to global scale.
+2. The second is that the least abundant species has one individual (_i.e._,
+   `Nmin=1`) and only one species has this abundance (_i.e._, `S(Nmin)=1`).
+   This assumption is defended by [Curtis2002][1] for "small" samples, but is
+   also extended ("with care") in the same work to global scale.
 
-### Lognormal characterized by St, a, and N0
+### Lognormal characterized by `St`, `a`, and `N0`
 
 In some cases, the abovementioned assumptions are unreasonable for a given
-simulation; e.g., if ecologic and evolutionary homogeneity cannot be assumed
-and `S(Nmin) >> 1` or `Nmin >> 1`. In other cases, NT/Nmax may be an inadequate
-estimator of the abundance distribution; e.g., if the abundance of the most
+simulation; _e.g._, if ecologic and evolutionary homogeneity cannot be assumed
+and `S(Nmin) >> 1` or `Nmin >> 1`. In other cases, `NT/Nmax` may be an inadequate
+estimator of the abundance distribution; _e.g._, if the abundance of the most
 abundant member of the community is a clear outlier in the fit to a lognormal
-distribution. Finally, in some cases the estimations of St, a, and N0 from the
-data are trivial; e.g., if unbiased top-subsets of abundance profiles are
+distribution. Finally, in some cases the estimations of `St`, `a`, and `N0` from
+the data are trivial; _e.g._, if unbiased top-subsets of abundance profiles are
 available (and the total number of cells in the environment can be estimated).
 In all these cases, a preferred parametrization of the lognormal distribution is
-by directly using the total number of species in the community (St), the
-reciprocal of dispersion (a), and the modal abundance in individuals (N0). If
-the species curve is represented with log2(cells) in the X-axis and number of
-species in the Y-axis, the resulting histogram can be fit to a normal
-distribution with parameters mu and sigma. The mean directly estimates the modal
-abundance (`N0=mu`), and the variance can be used to calculate the a parameter
-as: `a=sqrt(2*ln(2*sigma^2))`. It's important to know NT, because usually the
-abundance profiles are expressed in relative abundance, but the X-axis must be
-expressed in individuals (cells). St is almost always underestimated, even after
-applying corrections like Chao's [Chao1984][5]. However, it can be easily
-estimated as the number of species with abundance above N0 times two, since the.
+by directly using the total number of species in the community (`St`), the
+reciprocal of dispersion (`a`), and the modal abundance in individuals (`N0`).
+
+#### Estimating lognormal parameters from the species distribution
+
+It is important to know `NT` (total individuals in the community), because usually
+the abundance profiles are expressed in relative abundance, but the X-axis must be
+expressed in number of individuals (cells). If the species curve is represented with
+`log(cells)` in the X-axis and number of species in the Y-axis, the resulting histogram
+can be fit to a normal distribution with parameters `mu` and `sigma`. The mean estimates
+the modal abundance in logarithmic units (`N0 = exp(mu)`). On the other hand, the
+variance can be used to calculate the `a` parameter. First, we must calculate the variance
+in units of cells: `cell_var = [exp(sigma^2) - 1] * exp(2 * mu + sigma^2)`. Finally, we
+calculate `a` from the cell distribution variance: `a = sqrt(2 * ln(2 * cells_var))`.
+
+Lastly, `St` is almost always underestimated, even after applying corrections like Chao's
+[Chao1984][5]. If the estimate of richness (`St`) is robust, it can be directly used (_e.g._,
+upon rarefaction analysis). However, it can be alternatively estimated as the number of
+species with abundance above `N0` times two, since the modal abundance `N0` represents
+the distribution median (not the mean).
 
 ## Sampling parameters
 
