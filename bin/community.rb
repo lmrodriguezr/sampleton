@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-$:.push File.expand_path("../../lib", __FILE__)
-require "sampleton"
+$:.push File.expand_path('../../lib', __FILE__)
+require 'sampleton'
 
 if ARGV.empty?
   puts "Usage: #{$0} config.yaml"
@@ -10,4 +10,4 @@ end
 e = Sampleton.new
 e.parametrize(ARGV.first)
 rc = e.community.realize
-puts "Expected richness: %d." % rc.profile.size
+puts 'Expected richness: %d.' % rc.profile.size

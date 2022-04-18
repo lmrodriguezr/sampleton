@@ -1,1 +1,1 @@
-require "sampleton/common"
+require 'sampleton/common'
