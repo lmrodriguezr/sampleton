@@ -4,7 +4,15 @@ $:.push File.expand_path('../../lib', __FILE__)
 require 'sampleton'
 
 if ARGV.empty?
-  puts "Usage: #{$0} config.yaml"
+  puts <<~HELP
+
+    Estimate the richness of the community (St) based on the parameters provided
+
+    Usage: #{$0} config.yaml
+
+    config.yaml   Path to the configuration YAML
+
+  HELP
   exit
 end
 e = Sampleton.new

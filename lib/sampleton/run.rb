@@ -17,8 +17,8 @@ class Sampleton::Run
   end
 
   def advance(i, n)
-   adv = i * 50 / n
-   say("[#{'#' * adv}#{' ' * (50 - adv)}] #{i}/#{n} \r", false)
+    adv = i * 50 / n
+    say("[#{'#' * adv}#{' ' * (50 - adv)}] #{i}/#{n} \r", false)
   end
 
   def now

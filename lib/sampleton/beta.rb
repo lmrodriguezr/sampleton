@@ -1,6 +1,6 @@
 
 class Sampleton::Beta
-  @@PARAMS = %i[index kmer]
+  @@PARAMS = %i[index kmer block]
   attr_accessor *@@PARAMS
 
   def compare(a, b)
@@ -53,6 +53,11 @@ class Sampleton::Beta
     Math.sqrt(
       (0 .. (a.size - 1)).map { |i| (a[i] - b[i])**2 }.reduce(:+)
     )
+  end
+
+  def custom(a, b)
+    @custom_block ||= lambda { |a, b| eval block.to_s }
+    @custom_block.call(a, b)
   end
 
   alias :sorensen :bray_curtis

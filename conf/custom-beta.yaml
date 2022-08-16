@@ -1,0 +1,28 @@
+###
+# Example of a custom beta-diversity metric
+# This example cannot be directly used as it's missing the mandatory
+# `community` section
+###
+
+---
+##
+# Beta-diversity estimation: metric to evaluate
+beta:
+  ##
+  # Index used to estimate beta diversity
+  index: custom
+  # Simply a reimplementation of the Euclidean distance, but with relative
+  # abundances instead of absolute abundances.
+  # 
+  # Custom blocks receive two parameters: a and b, numeric Arrays with the
+  # absolute abundances of each species in the two communities
+  block: |
+    aN = a.reduce(:+)
+    ar = a.map { |i| i.to_f / aN }
+    bN = b.reduce(:+)
+    br = b.map { |i| i.to_f / bN }
+    sq = (0 .. (a.size - 1)).map { |i| (ar[i] - br[i])**2 }
+    sum_sq = sq.reduce(:+)
+    return Math.sqrt(sum_sq)
+
+
